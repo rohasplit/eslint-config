@@ -42,6 +42,15 @@ const config = {
 
     ...(parser() === '@babel/eslint-parser' && {
       requireConfigFile: false,
+
+      ...(['react-dom', 'next'].some((dependency) => Boolean(package.dependencies[dependency])) && {
+        babelOptions: {
+          presets: [
+            Boolean(package.dependencies['react-dom']) && '@babel/preset-react',
+            Boolean(package.dependencies['next']) && 'next/babel',
+          ].filter(Boolean),
+        },
+      }),
     }),
   },
 
@@ -59,8 +68,13 @@ const config = {
   ].filter(Boolean),
 
   rules: {
-    'prettier/prettier': 1,
     'no-console': 1,
+
+    'no-unused-vars': 1,
+    'no-extra-boolean-cast': 1,
+    'no-prototype-builtins': 1,
+
+    'prettier/prettier': 1,
 
     ...(Boolean(package.dependencies['typescript']) && {
       '@typescript-eslint/no-var-requires': 0,
@@ -68,8 +82,8 @@ const config = {
   },
 };
 
-console.log('+++ Start of Generated ESLint Config');
-console.log(JSON.stringify(config, null, 2));
-console.log('+++ End of Generated ESLint Config');
+// console.log('+++ Start of Generated ESLint Config');
+// console.log(JSON.stringify(config, null, 2));
+// console.log('+++ End of Generated ESLint Config');
 
 module.exports = config;
