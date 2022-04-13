@@ -1,16 +1,20 @@
 # Usage
 
-1. Install peer dependencies
+1. Install this package as a development dependency.
 
 ```sh
-# yarn
-yarn add -D eslint@^8.12.0 prettier@^2.6.1
-
-# npm
-npm install eslint@^8.12.0 prettier@^2.6.1 --save-dev
+# example using yarn
+yarn add -D @rohasplit/eslint-config
 ```
 
-2. Create a `.eslintrc.js` file in your project's directory with the following content:
+2. Install the required peer dependencies. Some package managers such as npm^7 and pnpm do this automatically.
+
+```sh
+# example using yarn
+yarn add -D eslint@^8.13.0 prettier@^2.6.2
+```
+
+3. Create a `.eslintrc.js` file in your project's directory with the following content:
 
 ```js
 require('@rohasplit/eslint-config/patch');

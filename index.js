@@ -2,8 +2,10 @@ const path = require('path');
 const cwd = process.cwd();
 const package = require(path.resolve(cwd, 'package.json'));
 
+const isDependency = (dependency) => dependency in package.dependencies || dependency in package.devDependencies;
+
 const parser = () => {
-  if (package.dependencies.typescript) {
+  if (isDependency('typescript')) {
     return '@typescript-eslint/parser';
   }
 
@@ -12,7 +14,7 @@ const parser = () => {
 
 const sourceType = () => {
   const isModule = ['esm', 'typescript', 'next', 'react-dom'].some((dependency) => {
-    return Boolean(package.dependencies[dependency]);
+    return isDependency(dependency);
   });
 
   if (isModule) {
@@ -29,7 +31,7 @@ const config = {
     es2017: true,
     es2020: true,
 
-    ...(Boolean(package.dependencies['react-dom']) && {
+    ...(isDependency('react-dom') && {
       browser: true,
     }),
   },
@@ -43,11 +45,12 @@ const config = {
     ...(parser() === '@babel/eslint-parser' && {
       requireConfigFile: false,
 
-      ...(['react-dom', 'next'].some((dependency) => Boolean(package.dependencies[dependency])) && {
+      ...(['react-dom', 'next'].some((dependency) => isDependency(dependency)) && {
         babelOptions: {
           presets: [
-            Boolean(package.dependencies['react-dom']) && '@babel/preset-react',
-            Boolean(package.dependencies['next']) && 'next/babel',
+            //
+            isDependency('react-dom') && '@babel/preset-react',
+            isDependency('next') && 'next/babel',
           ].filter(Boolean),
         },
       }),
@@ -56,14 +59,14 @@ const config = {
 
   plugins: [
     //
-    Boolean(package.dependencies.typescript) && '@typescript-eslint',
+    isDependency('typescript') && '@typescript-eslint',
     'prettier',
   ].filter(Boolean),
 
   extends: [
     'eslint:recommended',
-    Boolean(package.dependencies.typescript) && 'plugin:@typescript-eslint/recommended',
-    Boolean(package.dependencies.next) && 'plugin:@next/next/recommended',
+    isDependency('typescript') && 'plugin:@typescript-eslint/recommended',
+    isDependency('next') && 'plugin:@next/next/recommended',
     'prettier',
   ].filter(Boolean),
 

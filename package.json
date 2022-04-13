@@ -1,27 +1,27 @@
 {
   "name": "@rohasplit/eslint-config",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "volta": {
     "node": "16.14.2",
     "yarn": "1.22.18"
   },
-  "peerDependencies": {
-    "eslint": ">=8.12.0",
-    "prettier": ">=2.6.1"
-  },
   "dependencies": {
-    "@babel/core": "^7.17.8",
+    "@babel/core": "^7.17.9",
     "@babel/eslint-parser": "^7.17.0",
     "@babel/preset-react": "^7.16.7",
-    "@rushstack/eslint-patch": "^1.1.1",
-    "@typescript-eslint/eslint-plugin": "^5.17.0",
-    "@typescript-eslint/parser": "^5.17.0",
-    "eslint-config-next": "^12.1.4",
+    "@rushstack/eslint-patch": "^1.1.2",
+    "@typescript-eslint/eslint-plugin": "^5.19.0",
+    "@typescript-eslint/parser": "^5.19.0",
+    "eslint-config-next": "^12.1.5",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0"
   },
   "devDependencies": {
-    "eslint": "^8.12.0",
-    "prettier": "^2.6.1"
+    "eslint": "^8.13.0",
+    "prettier": "^2.6.2"
+  },
+  "peerDependencies": {
+    "eslint": "^8.13.0",
+    "prettier": "^2.6.2"
   }
 }
