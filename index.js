@@ -67,6 +67,7 @@ const config = {
     'eslint:recommended',
     isDependency('typescript') && 'plugin:@typescript-eslint/recommended',
     isDependency('next') && 'plugin:@next/next/recommended',
+    isDependency('next') && 'next/core-web-vitals',
     'prettier',
   ].filter(Boolean),
 
@@ -79,14 +80,18 @@ const config = {
 
     'prettier/prettier': 1,
 
-    ...(Boolean(package.dependencies['typescript']) && {
-      '@typescript-eslint/no-var-requires': 0,
+    ...(isDependency('typescript') && {
+      '@typescript-eslint/no-var-requires': 1,
+    }),
+
+    ...(isDependency('next') && {
+      '@next/next/no-img-element': 1,
     }),
   },
 };
 
-// console.log('+++ Start of Generated ESLint Config');
-// console.log(JSON.stringify(config, null, 2));
-// console.log('+++ End of Generated ESLint Config');
+console.log('+++ Start of Generated ESLint Config');
+console.log(JSON.stringify(config, null, 2));
+console.log('+++ End of Generated ESLint Config');
 
 module.exports = config;
