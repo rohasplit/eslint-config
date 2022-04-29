@@ -90,8 +90,8 @@ const config = {
   },
 };
 
-console.log('+++ Start of Generated ESLint Config');
-console.log(JSON.stringify(config, null, 2));
-console.log('+++ End of Generated ESLint Config');
+// console.log('+++ Start of Generated ESLint Config');
+// console.log(JSON.stringify(config, null, 2));
+// console.log('+++ End of Generated ESLint Config');
 
 module.exports = config;
