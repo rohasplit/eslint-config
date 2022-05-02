@@ -2,7 +2,11 @@ const path = require('path');
 const cwd = process.cwd();
 const package = require(path.resolve(cwd, 'package.json'));
 
-const isDependency = (dependency) => dependency in package.dependencies || dependency in package.devDependencies;
+const isDependency = (/** @type {string} */ dependency) =>
+  dependency in package.dependencies || dependency in package.devDependencies;
+
+const isAnyOneADependency = (/** @type {Array<string>} */ dependencies) =>
+  dependencies.some((dependency) => isDependency(dependency));
 
 const parser = () => {
   if (isDependency('typescript')) {
@@ -13,9 +17,7 @@ const parser = () => {
 };
 
 const sourceType = () => {
-  const isModule = ['esm', 'typescript', 'next', 'react-dom'].some((dependency) => {
-    return isDependency(dependency);
-  });
+  const isModule = isAnyOneADependency(['esm', 'typescript', 'next', 'react-dom']);
 
   if (isModule) {
     return 'module';
@@ -45,7 +47,7 @@ const config = {
     ...(parser() === '@babel/eslint-parser' && {
       requireConfigFile: false,
 
-      ...(['react-dom', 'next'].some((dependency) => isDependency(dependency)) && {
+      ...(isAnyOneADependency(['react-dom', 'next']) && {
         babelOptions: {
           presets: [
             //

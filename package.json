@@ -1,8 +1,8 @@
 {
   "name": "@rohasplit/eslint-config",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "dependencies": {
-    "@babel/core": "^7.17.9",
+    "@babel/core": "^7.17.10",
     "@babel/eslint-parser": "^7.17.0",
     "@babel/preset-react": "^7.16.7",
     "@rushstack/eslint-patch": "^1.1.3",
