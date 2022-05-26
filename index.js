@@ -75,11 +75,7 @@ const config = {
 
   rules: {
     'no-console': 1,
-
     'no-unused-vars': 1,
-    'no-extra-boolean-cast': 1,
-    'no-prototype-builtins': 1,
-
     'prettier/prettier': 1,
 
     ...(isDependency('typescript') && {
