@@ -67,16 +67,48 @@ const config = {
 
   extends: [
     'eslint:recommended',
+    'plugin:import/recommended',
     isDependency('typescript') && 'plugin:@typescript-eslint/recommended',
+    isDependency('typescript') && 'plugin:import/typescript',
     isDependency('next') && 'plugin:@next/next/recommended',
     isDependency('next') && 'next/core-web-vitals',
     'prettier',
   ].filter(Boolean),
 
+  settings: {
+    ...(isDependency('typescript') && {
+      'import/parsers': {
+        '@typescript-eslint/parser': ['.ts', '.tsx'],
+      },
+    }),
+
+    'import/resolver': {
+      node: {},
+      ...(isDependency('typescript') && {
+        typescript: {},
+      }),
+    },
+  },
+
   rules: {
     'no-console': 1,
     'no-unused-vars': 1,
     'prettier/prettier': 1,
+
+    'import/no-extraneous-dependencies': [1],
+    'import/order': [
+      1,
+      {
+        groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
+        pathGroupsExcludedImportTypes: ['builtin'],
+        pathGroups: [
+          {
+            pattern: 'classnames/bind',
+            group: 'sibling',
+          },
+        ],
+      },
+    ],
 
     ...(isDependency('typescript') && {
       '@typescript-eslint/no-var-requires': 1,
