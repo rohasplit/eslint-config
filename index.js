@@ -92,7 +92,12 @@ const config = {
 
   rules: {
     'no-console': 1,
-    'no-unused-vars': 1,
+    ...(!isDependency('typescript') && {
+      'no-unused-vars': 1,
+    }),
+    ...(isDependency('typescript') && {
+      'no-unused-vars': 0,
+    }),
     'prettier/prettier': 1,
 
     'import/no-extraneous-dependencies': [1],
