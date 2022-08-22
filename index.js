@@ -43,6 +43,7 @@ const config = {
   parserOptions: {
     sourceType: sourceType(),
     ecmaVersion: 2020,
+    ...(isDependency('typescript') && { project: 'tsconfig.json' }),
 
     ...(parser() === '@babel/eslint-parser' && {
       requireConfigFile: false,
@@ -117,6 +118,7 @@ const config = {
 
     ...(isDependency('typescript') && {
       '@typescript-eslint/no-var-requires': 1,
+      '@typescript-eslint/await-thenable': 1,
     }),
 
     ...(isDependency('next') && {
